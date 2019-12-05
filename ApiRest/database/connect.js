@@ -1,9 +1,4 @@
-const mongose = require('mongoose');
-mongose.connect("mongodb://172.22.0.2/ApiRest", {
-    useNewUrlParser: true
-}).then(() => {
-    console.log('Conection to mongodb successful');
-}).catch(err => {
-    console.log('Conection to mongodb failed');
-});
+const mongoose = require('mongoose');
+const databasename = "apirest";
+mongoose.connect("mongodb://172.22.0.2:27017/" + databasename);
 module.exports = mongoose;

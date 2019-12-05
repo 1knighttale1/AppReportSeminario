@@ -68,8 +68,7 @@ const HOMESCHEMA = {
         movil: String,
         email: String,
         ciudad: String,
-        foto: String,
-
+        foto: String
     }
 }
 

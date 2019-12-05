@@ -1,5 +1,5 @@
 const mongose = require('mongoose');
-mongose.connect("mongodb://172.21.0.2/AppReportSeminario", {
+mongose.connect("mongodb://172.22.0.2/ApiRest", {
     useNewUrlParser: true
 }).then(() => {
     console.log('Conection to mongodb successful');

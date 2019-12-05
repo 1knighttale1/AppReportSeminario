@@ -1,7 +1,77 @@
 const mongoose = require("./connect");
 const HOMESCHEMA = {
-    
-};
+    status: String,
+    oProperty : {
+        id: Number,
+        pk: Number,
+        codigo: String,
+        idVendedor: Number,
+        codigoInmobiliaria: String,
+        STATUS: String,
+        idtipo: Number, 
+        tipo: String,
+        oferta: String,
+        estado: String,
+        idCiudad: Number,
+        idTipoInmuble: Number,
+        idTipoOferta: Number,
+        region: String,
+        ubicacion: String,
+        zona: String,
+        idZona: Number,
+        direccion: String,
+        moneda: String,
+        monedaIso: String,
+        precio: String,
+        precioIso: Number,
+        descripcion: String,
+        fecentrega: String,
+        servicios: String,
+        amurallado: String,
+        anioconstruccion: Number,
+        desHabitacion: String,
+        desBano: String,
+        supconstruida: String,
+        supterraza: Number,
+        numDormitorios: Number,
+        dormitorios: String,
+        numBanios: Number,
+        banios: String,
+        piso: Number,
+        elevador: String,
+        baulera: String,
+        piscina: String,
+        parqueos: String,
+        numParqueos: Number,
+        amoblado: String,
+        fecpublicacion: String,
+        latitud: String,
+        longitud: String,
+        bshow: Boolean,
+        bmipublic: Boolean,
+        rating: Number,
+        images: [
+            {
+                pk: Number,
+            },
+           
+        ],
+        favoritos: Number,
+        bHasNetwork: Boolean,
+    },
+    oContact: {
+        pk: Number,
+        name: String,
+        lastname: String,
+        phone: Number,
+        phone2: Number,
+        movil: String,
+        email: String,
+        ciudad: String,
+        foto: String,
 
-const HOME = mongoose.model("home", HOMESCHEMA);
-module.exports = HOME;
+    }
+}
+
+const HOMES = mongoose.model("homes", HOMESCHEMA);
+module.exports = HOMES;

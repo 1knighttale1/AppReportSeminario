@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    build: .
+    links:
+      - mongo
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/opt/app
+      - /opt/app/node_modules
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+volumes:
+  mongodata:

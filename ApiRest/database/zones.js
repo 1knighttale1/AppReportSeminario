@@ -1,11 +1,11 @@
 const mongoose = require("./connect");
 const ZONESCHEMA = {
-    id: Number,
+    id: String,
     departamento: String,
     nombre: String,
     zoom: Number,
     lat: Number,
-    lng: Number,
+    long: Number,
     coordenadas: [
 
     ]

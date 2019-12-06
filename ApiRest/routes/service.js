@@ -2,10 +2,12 @@ var express = require("express");
 
 var USER = require("../database/users");
 var HOME = require("../database/homes");
+var NEIGHBORHOOD = require("../database/zones");
 //const USER = user.model;
 //const USERSCHEMA = user.schema;
-
 var router = express.Router();
+var jwt = require("jsonwebtoken");
+
 
 /*Register Users*/
 router.post('/user', async(req, res) => {
@@ -62,7 +64,37 @@ router.get('/neighborhood', (req, res) => {
 });
 
 /**LOGIN */
-router.post('/login', async(req, res, next)=>{
-
+router.post('/login', (req, res, next)=>{
+    //console.log(req.body);
+    var params = req.body;
+    var password = req.body;
+    USER.find({email:params.email, password:password.password}).exec((err, docs)=>{
+        if (err){
+            res.status(300).json({
+                "msn": "Problemas con la base de datos"
+            });
+            return;
+        }
+        if (docs.length == 0){
+            res.status(300).json({
+                "msn": "Usuario y/o Password Incorrecto"
+            });
+            return;
+        } else {
+            //cracion del token
+            jwt.sign({name: params.email, password: password}, "qwerty", (err, token)=>{
+                if(err){
+                    res.status(300).json({
+                        "msn": "Error con JSONWEBTOKEN"
+                    });
+                    return;
+                }
+                res.status(200).json({
+                    "token": token
+                });
+                return;
+            });
+        }
+    });
 });
 module.exports = router;

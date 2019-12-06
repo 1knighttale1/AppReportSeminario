@@ -53,6 +53,30 @@ router.get('/user', (req, res) => {
     });
 });
 
+/**Delete User */
+router.get('/user/delete', (req, res) => {
+    var params = req.query;
+    var id ={};
+    if(params.id != null){
+        id["_id"] = params.id;
+        HOME.find(id).remove().exec((err) => {
+            if(err){
+                res.status(300).json({
+                    msn:"Error al eliminar tabla"
+                });
+                return;
+            }
+            res.status(200).json({
+                msn: "Se elimino correctamente la tabla"
+            });
+            return;
+        });
+    }
+    res.status(200).json({
+        msn: "No se encontro id"
+    });
+});
+
 /*Looking a specific home*/
 router.get('/home', (req, res) => {
     
@@ -167,4 +191,7 @@ router.post('/login', (req, res, next)=>{
         }
     });
 });
+
+
+
 module.exports = router;

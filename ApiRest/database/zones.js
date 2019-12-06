@@ -6,9 +6,10 @@ const ZONESCHEMA = {
     zoom: Number,
     lat: Number,
     lng: Number,
-    coordenadas: [
-
-    ]
+    coordenadas: [{
+        lat: [],
+        long: []
+        }]
 }
 
 const ZONES = mongoose.model("zones", ZONESCHEMA);

@@ -1,11 +1,13 @@
 const mongoose = require("./connect");
 const USERSCHEMA = {
+    ci: Number,
     name: String,
-    email: String,
     password: String,
-    registerdate: Date,
+    email: String,
+    phone: Number,
     sex: String,
-    address: String
+    address: String,
+    registerdate: Date
 }
 
 const USERS = mongoose.model("users", USERSCHEMA);

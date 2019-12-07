@@ -6,7 +6,7 @@ const USERSCHEMA = {
     phone: Number,
     sex: String,
     address: String,
-    registerdate: Date.now(),
+    registerdate: Date,
     tipo: String
 }
 

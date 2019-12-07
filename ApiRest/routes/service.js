@@ -9,8 +9,14 @@ var jwt = require("jsonwebtoken");
 
 /*Register Users*/
 router.post('/user', async(req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
     var params = req.body;
+    if(params.tipo == null){
+        console.log("se registro agente");
+        params["tipo"] = params.tipo;
+    }else{
+        console.log("se registro cliente");
+    }
     params["registerdate"] = new Date();
     var users = new USER(params);
     var result = await users.save();
@@ -109,8 +115,8 @@ router.get('/homes/search', (req, res) => {
     }
 });
 
-/**Show Homes */
-router.get('/homes', (req, res) => {
+/**Show previus details Homes */
+router.get('/homes/', (req, res) => {
     var cad = "contacto lat long precio imagen"; //detalles previos
     var skip = 0;
     var limit = 20;
@@ -149,6 +155,7 @@ router.get('/homes', (req, res) => {
 router.get('/zone', (req, res) => {
     var params = req.query;
     var limit = 100;
+    var filter = {};
     if (params.limit != null) {
         limit = parseInt(params.limit);
     } 
@@ -156,7 +163,10 @@ router.get('/zone', (req, res) => {
     if (params.skip != null) {
         skip = parseInt(params.skip);
     }
-    ZONE.find({}).limit(limit).skip(skip).exec((err, docs) => {
+    if(params.search != null){
+        filter["directions"] = new RegExp(params.search, "g");
+    }
+    ZONE.find(filter).limit(limit).skip(skip).exec((err, docs) => {
         res.status(200).json(docs);
     });
 });

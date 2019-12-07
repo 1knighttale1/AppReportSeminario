@@ -1,22 +1,23 @@
 const mongoose = require("./connect");
 const HOMESCHEMA = {
-    id: Number,
     ciudad: String,
     tipo: String,
+    Condominio:Boolean,
+    departamentos: String,
     estado: String,
-    cuartos: Number,
+    habitaciones: Number,
     baños: Number,
     superficie: Number,
     antiguedad: Number,
-    street: String,
+    calle: String,
+    precio: Number,
     descripcion: String,
-    price: Number,
-    lat: String,
-    lon: String,
-    neighborhood: String,
-    gallery: Array,
-    contact: Number,
-    date: {
+    lat: Number,
+    long: Number,
+    vecindario: String,
+    galeria: Array,
+    contacto: Number,
+    fecha: {
         type:Date,
         default:Date.now()
     }

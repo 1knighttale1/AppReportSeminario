@@ -7,7 +7,8 @@ const USERSCHEMA = {
     phone: Number,
     sex: String,
     address: String,
-    registerdate: Date
+    registerdate: Date.now(),
+    tipo: String
 }
 
 const USERS = mongoose.model("users", USERSCHEMA);

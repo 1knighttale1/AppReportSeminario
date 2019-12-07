@@ -15,6 +15,7 @@ const HOMESCHEMA = {
     lat: Number,
     lng: Number,
     vecindario: String,
+    colegio: String,
     imagen: String,
     galeria: Array,
     contacto: Number,

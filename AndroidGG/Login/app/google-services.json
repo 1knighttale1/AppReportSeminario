@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "503487573098",
+    "firebase_url": "https://bienesraices-569b4.firebaseio.com",
+    "project_id": "bienesraices-569b4",
+    "storage_bucket": "bienesraices-569b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503487573098:android:ee4c67c4dbffeb338cae13",
+        "android_client_info": {
+          "package_name": "com.example.log_in"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503487573098-fumpt2dlj6emvvci0c619js550ta4lkg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.log_in",
+            "certificate_hash": "30026cdfa1f2f9d4186a4987bd4e603659dc8666"
+          }
+        },
+        {
+          "client_id": "503487573098-8bsuuc4n8m0rl5ogc18p2q8k4k234be7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk9m4I3rF7Yi9do24olnpyHkJLgT1H64E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503487573098-8bsuuc4n8m0rl5ogc18p2q8k4k234be7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

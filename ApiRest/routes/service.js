@@ -54,31 +54,37 @@ router.get('/user', (req, res) => {
 });
 
 /**Delete User */
-router.get('/user/delete', (req, res) => {
-    var params = req.query;
-    var id ={};
-    if(params.id != null){
-        id["_id"] = params.id;
-        HOME.find(id).remove().exec((err) => {
-            if(err){
-                res.status(300).json({
-                    msn:"Error al eliminar tabla"
-                });
-                return;
-            }
-            res.status(200).json({
-                msn: "Se elimino correctamente la tabla"
-            });
-            return;
-        });
+router.delete("/user", async(req,res) => {
+    var id = req.query.id;
+    if (id == null) {
+      res.status(300).json({
+        msn: "introducir id"
+      });
+      return;
     }
-    res.status(200).json({
-        msn: "No se encontro id"
+    var result = await USER.remove({_id: id});
+    res.status(200).json(result);
+  });
+
+/*Show Homes*/
+router.get('/homes', (req, res) => {
+    var params = req.query;
+    var limit = 100;
+    if (params.limit != null) {
+        limit = parseInt(params.limit);
+    } 
+    var skip = 0;
+    if (params.skip != null) {
+        skip = parseInt(params.skip);
+    }
+    HOME.find({}).limit(limit).skip(skip).exec((err, docs) => {
+        res.status(200).json(docs);
     });
 });
 
+
 /*Looking a specific home*/
-router.get('/home', (req, res) => {
+router.get('/homes/search', (req, res) => {
     
     var params = req.query;
     var filter = {};

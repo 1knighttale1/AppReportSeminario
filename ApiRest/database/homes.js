@@ -8,16 +8,17 @@ const HOMESCHEMA = {
     habitaciones: Number,
     baños: Number,
     superficie: Number,
-    antiguedad: Number,
     calle: String,
     precio: Number,
     descripcion: String,
+    fecha_construccion: Date,
     lat: Number,
-    long: Number,
+    lng: Number,
     vecindario: String,
+    imagen: String,
     galeria: Array,
     contacto: Number,
-    fecha: {
+    fecha_registro: {
         type:Date,
         default:Date.now()
     }

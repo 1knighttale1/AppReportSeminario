@@ -30,6 +30,9 @@
         <activity android:name=".RegisterActivity">
 
         </activity>
+        <activity android:name=".SearchActivity">
+
+        </activity>
     </application>
 
 </manifest>

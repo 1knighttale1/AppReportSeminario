@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
                 .build();
-        signInButton = (SignInButton) findViewById(R.id.btngoogle);
+        signInButton = findViewById(R.id.btngoogle);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
 
        /** login*/
-        loadcomponents();
+            loadcomponents();
 
     }
 
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void goMainScreen() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this,SearchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -101,9 +102,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Button btnregistar = findViewById(R.id.btnregistrar);
         btnconectar.setOnClickListener(this);
         btnregistar.setOnClickListener(this);
-        //boton de google
-        SignInButton logingoogle = findViewById(R.id.btngoogle);
-        logingoogle.setOnClickListener(this);
+
+       // SignInButton logingoogle = findViewById(R.id.btngoogle);
+        //logingoogle.setOnClickListener(this);
+
     }
 
     @Override
@@ -119,17 +121,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 startActivity(registro);
                 break;
             }
-            case R.id.btngoogle:{
+           /* case R.id.btngoogle:{
                 signin();
-                break;
-            }
+            }*/
         }
     }
 
-    private void signin(){
+  /* private void signin(){
         Intent intent = Auth.GoogleSignInApi.getSignInIntent( googleApiClient );
         startActivityForResult(intent,SIGN_IN_CODE);
-    }
+    }*/
 
     private void sendlogin(){
         final EditText email = findViewById(R.id.Etemail);

@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 import static com.example.log_in.Service.HOST;
+import static com.example.log_in.Service.token;
 
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -36,20 +37,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private SignInButton signInButton;
     public static final int SIGN_IN_CODE = 777;
 
-    /**intento 2 login*/
-    EditText email, pass;
-    Button btn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        /**intento 2 login*/
-        email=findViewById(R.id.Etemail);
-        pass=findViewById(R.id.Etpassword);
-        btn=findViewById(R.id.btnconectar);
-        btn.setOnClickListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -68,56 +59,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        /**login
-        loadcomponents();*/
+       /** login*/
+        loadcomponents();
 
-    }
-
-    /**intento 2 login*/
-    @Override
-    public void onClick(View v){
-        if(v.getId()==R.id.btnconectar){
-            sendlogin();
-        }
-        Intent intent = null;
-        switch (v.getId()) {
-            case R.id.btnregistrar:
-                intent = new Intent(this, RegisterActivity.class);
-        }
-        startActivity(intent);
-    }
-    private void sendlogin() {
-        AsyncHttpClient clien=new AsyncHttpClient();
-        RequestParams req=new RequestParams();
-        req.put("email",email.getText().toString());
-        req.put("password",pass.getText().toString());
-        clien.post(HOST+"/api/v1.0/login/", req, new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-
-                //Toast.makeText(getApplicationContext(),""+response,Toast.LENGTH_LONG).show();
-                try {
-                    String resp=response.getString("message");
-                    if(resp.equals("autenticacion exitosa")){
-                        Intent in=new Intent(LoginActivity.this,MainActivity.class);
-                        Service.token=response.getString("token");
-                        startActivity(in);
-                    }else if(resp.equals("el password es incorrecto")){
-                        Toast.makeText(getApplicationContext(),resp,Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(getApplicationContext(),resp,Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                super.onSuccess(statusCode, headers, response);
-            }
-        });
     }
 
     @Override
@@ -150,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
 
-    /**login
+    /**login*/
 
     private void loadcomponents(){
         Button btnconectar = findViewById(R.id.btnconectar);
@@ -171,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 break;
             }
             case R.id.btnregistrar:{
-                Intent registro = new Intent(LoginActivity.this, Register.class);
+                Intent registro = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(registro);
                 break;
             }
@@ -197,12 +141,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         params.add("email", email.getText().toString());
         params.add("password", password.getText().toString());
 
-        client.post(Service.LOGIN_SERVICE, params, new JsonHttpResponseHandler(){
+        client.post(HOST+"/api/v1.0/login", params, new JsonHttpResponseHandler(){
             public void onSuccess(int statusCode, Header[] headers, JSONObject response){
                 if(response.has("token")){
                     try {
-                        Service.TOKEN=response.getString("token");
-                        Service.LOGIN_SERVICE=email.getText().toString();
+                        token=response.getString("token");
+                        //Service.LOGIN_SERVICE=email.getText().toString();
                         Toast.makeText(LoginActivity.this, "Login Exitoso", Toast.LENGTH_SHORT).show();
                         Intent main = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(main);
@@ -213,5 +157,5 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-    }*/
+    }
 }

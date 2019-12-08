@@ -43,10 +43,6 @@
         android:ems="10"
         android:hint="Usuario"
         android:inputType="textPersonName"
-<<<<<<< HEAD
-=======
-        android:hint="Email"
->>>>>>> 123c640a5cdebb861602c1dd98e880b154520f52
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
@@ -61,10 +57,6 @@
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
-<<<<<<< HEAD
-=======
-        android:hint="password"
->>>>>>> 123c640a5cdebb861602c1dd98e880b154520f52
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Etemail" />

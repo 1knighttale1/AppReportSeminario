@@ -20,6 +20,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,6 +79,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if(v.getId()==R.id.btnconectar){
             sendlogin();
         }
+        Intent intent = null;
+        switch (v.getId()) {
+            case R.id.btnregistrar:
+                intent = new Intent(this, RegisterActivity.class);
+        }
+        startActivity(intent);
     }
     private void sendlogin() {
         AsyncHttpClient clien=new AsyncHttpClient();
@@ -141,6 +148,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
 
     /**login
 
@@ -206,6 +214,4 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
 
     }*/
-
-
 }

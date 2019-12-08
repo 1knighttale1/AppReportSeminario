@@ -1,8 +1,8 @@
 const mongoose = require("./connect");
 const USERSCHEMA = {
     name: String,
-    password: String,
     email: String,
+    password: String,
     phone: Number,
     sex: String,
     address: String,

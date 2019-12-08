@@ -6,71 +6,18 @@ var ZONE = require("../database/zones");
 var router = express.Router();
 var jwt = require("jsonwebtoken");
 
-
-/*Register Users*/
-router.post('/user', async(req, res) => {
-    //console.log(req.body);
-    var params = req.body;
-    if(params.tipo == null){
-        console.log("se registro agente");
-        params["tipo"] = params.tipo;
-    }else{
-        console.log("se registro cliente");
-    }
-    params["registerdate"] = new Date();
-    var users = new USER(params);
-    var result = await users.save();
-    res.status(200).json(result);
-});
-
-/**Creation Zones */
-router.post('/zone', async(req, res) => {
-    console.log(req.body);
-    var params = req.body;
-    var zone = new ZONE(params);
-    var result = await zone.save();
-    res.status(200).json(result);
-});
-
+/* GET home page. */
+router.get('/', function(req, res, next) {
+    res.render('index', { title: 'Express' });
+  });
 /*Creation Homes*/
-router.post('/home', async(req, res)=>{
+router.post('/homes', async(req, res)=>{
     console.log(req.body);
     var params = req.body;
     var homes = new HOME(params);
     var result = await homes.save();
     res.status(200).json(result);
 })
-
-/** ------------------------------------------------ */
-
-/*Show Users*/
-router.get('/user', (req, res) => {
-    var params = req.query;
-    var limit = 100;
-    if (params.limit != null) {
-        limit = parseInt(params.limit);
-    } 
-    var skip = 0;
-    if (params.skip != null) {
-        skip = parseInt(params.skip);
-    }
-    USER.find({}).limit(limit).skip(skip).exec((err, docs) => {
-        res.status(200).json(docs);
-    });
-});
-
-/**Delete User */
-router.delete("/user", async(req,res) => {
-    var id = req.query.id;
-    if (id == null) {
-      res.status(300).json({
-        msn: "introducir id"
-      });
-      return;
-    }
-    var result = await USER.remove({_id: id});
-    res.status(200).json(result);
-  });
 
 /*Show Homes*/
 router.get('/homes', (req, res) => {
@@ -151,6 +98,17 @@ router.get('/homes/', (req, res) => {
     });
 });
 
+/** --------------------------------------------------------------------------- */
+
+/**Creation Zones */
+router.post('/zone', async(req, res) => {
+    console.log(req.body);
+    var params = req.body;
+    var zone = new ZONE(params);
+    var result = await zone.save();
+    res.status(200).json(result);
+});
+
 /**Show Neighborhood */
 router.get('/zone', (req, res) => {
     var params = req.query;
@@ -172,13 +130,59 @@ router.get('/zone', (req, res) => {
 });
 
 /** ------------------------------------------------------------------------------ */
-
-/**LOGIN */
-router.post('/login', (req, res, next)=>{
+/*Register Users*/
+router.post('/user', async(req, res) => {
     //console.log(req.body);
     var params = req.body;
-    var password = req.body;
-    USER.find({email:params.email, password:password.password}).exec((err, docs)=>{
+    if(params.tipo == null){
+        console.log("se registro agente");
+        params["tipo"] = params.tipo;
+    }else{
+        console.log("se registro cliente");
+    }
+    params["registerdate"] = new Date();
+    var users = new USER(params);
+    var result = await users.save();
+    res.status(200).json(result);
+});
+
+
+/*Show Users*/
+router.get('/user', (req, res) => {
+    var params = req.query;
+    var limit = 100;
+    if (params.limit != null) {
+        limit = parseInt(params.limit);
+    } 
+    var skip = 0;
+    if (params.skip != null) {
+        skip = parseInt(params.skip);
+    }
+    USER.find({}).limit(limit).skip(skip).exec((err, docs) => {
+        res.status(200).json(docs);
+    });
+});
+
+/**Delete User */
+router.delete("/user", async(req,res) => {
+    var id = req.query.id;
+    console.log(req.query.id);
+    if (id == null) {
+      res.status(300).json({
+        msn: "introducir id"    
+      });
+      return;
+    }
+    var result = await USER.remove({_id: id});
+    res.status(200).json(result);
+  });
+
+/** ----------------------------------------------------------------------------------- */
+/**LOGIN */
+router.post('/login', async(req, res, next)=>{
+    //console.log(req.body);
+    var params = req.body;
+    USER.find({email:params.email, password:params.password}).exec((err, docs)=>{
         if (err){
             res.status(300).json({
                 "msn": "Problemas con la base de datos"
@@ -192,7 +196,7 @@ router.post('/login', (req, res, next)=>{
             return;
         } else {
             //cracion del token
-            jwt.sign({name: params.email, password: password}, "qwerty", (err, token)=>{
+            jwt.sign({name: params.email, password: params.password}, "password", (err, token)=>{
                 if(err){
                     res.status(300).json({
                         "msn": "Error con JSONWEBTOKEN"

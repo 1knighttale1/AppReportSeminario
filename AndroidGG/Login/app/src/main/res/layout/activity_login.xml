@@ -83,7 +83,8 @@
         android:text="Registrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/conectar" />
+        app:layout_constraintTop_toBottomOf="@+id/conectar"
+        android:onClick="onClick"/>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/login"

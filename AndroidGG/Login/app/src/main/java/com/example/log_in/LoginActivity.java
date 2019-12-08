@@ -22,7 +22,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 
-public class LoginActivity extends AppCompatActivity implements  GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends AppCompatActivity implements  View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient googleApiClient;
     private SignInButton signInButton;
@@ -78,6 +78,16 @@ public class LoginActivity extends AppCompatActivity implements  GoogleApiClient
     private void goMainScreen() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View view){
+        Intent intent = null;
+        switch (view.getId()) {
+            case R.id.registrar:
+             intent = new Intent(this, RegisterActivity.class);
+        }
         startActivity(intent);
     }
 }

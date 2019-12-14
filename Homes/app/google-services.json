@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "465135251135",
+    "firebase_url": "https://homes-81c20.firebaseio.com",
+    "project_id": "homes-81c20",
+    "storage_bucket": "homes-81c20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465135251135:android:2f2f9b6904cae3b340600a",
+        "android_client_info": {
+          "package_name": "com.example.homes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465135251135-nepd2b0ogh9dbrhnghotrh6f3shapruf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.homes",
+            "certificate_hash": "30026cdfa1f2f9d4186a4987bd4e603659dc8666"
+          }
+        },
+        {
+          "client_id": "465135251135-6lqivv5udot8ae1qag2b6ld92s2r8mc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7me6BPOckTVv8WxxdbDuWU3beOhFPrsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465135251135-6lqivv5udot8ae1qag2b6ld92s2r8mc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

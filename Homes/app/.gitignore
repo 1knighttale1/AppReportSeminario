@@ -1,0 +1,4 @@
+/build
+.gradle
+google-services.json
+*.iml

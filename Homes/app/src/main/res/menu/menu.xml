@@ -4,8 +4,9 @@
 
     <item
         android:id="@+id/map_menu"
-        android:title="Map Menu"
+        android:icon="@drawable/mapa_icon"
         app:showAsAction="always"
+        android:title="Map"
         >
     </item>
     <item

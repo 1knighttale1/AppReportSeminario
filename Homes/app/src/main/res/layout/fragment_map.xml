@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.MapFragment">
+    tools:context=".Fragments.MapFragment"
+    android:background="@drawable/fondo"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,20 +17,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnList"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Lista de vecindarios"
-                android:onClick="list"/>
-
-            <Button
-                android:id="@+id/btnSearch"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Buscar casas" />
         </LinearLayout>
 
         <com.google.android.gms.maps.MapView

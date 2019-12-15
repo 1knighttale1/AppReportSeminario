@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.homes.ListActivity;
 import com.example.homes.R;
+import com.example.homes.SearchActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -38,7 +39,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private View rootView;
     private GoogleMap mMap;
 
-    Button btnlista;
+
 
     public MapFragment() {
         // Required empty public constructor
@@ -53,18 +54,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // Inflate the layout for this fragment
 
         rootView = inflater.inflate(R.layout.fragment_map, container,false);
-        btnlista = (Button) rootView.findViewById(R.id.btnList);
-        btnlista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(rootView.getContext(),ListActivity.class);
-                startActivity(intent);
-                //Toast.makeText(rootView.getContext(),"Presiona",Toast.LENGTH_SHORT).show();
-            }
-        });
+
+
 
         return rootView;
     }
+
+    //Mapa de googleServices
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

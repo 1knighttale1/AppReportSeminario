@@ -17,4 +17,11 @@
         <item>Hombre</item>
         <item>Mujer</item>
     </string-array>
+
+    <string-array name="txt_casa">
+        <item>En venta</item>
+        <item>Alquiler</item>
+        <item>Departamento</item>
+        <item>Condominio</item>
+    </string-array>
 </resources>

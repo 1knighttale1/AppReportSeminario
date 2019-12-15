@@ -3,6 +3,7 @@ package com.example.homes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.homes.Fragments.MainFragment;
+import com.example.homes.Fragments.MapFragment;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -138,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
 
     private void goRegisterScreen() {
-        Intent intent = new Intent(this,FragmentsMapsActivity.class);
+        Intent intent = new Intent(this, RegisterGoogleActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,17 @@ public class RegisterGoogleActivity extends AppCompatActivity implements GoogleA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_google);
+
+        Button iniciar = findViewById(R.id.btnInit);
+        iniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent inten = new Intent(RegisterGoogleActivity.this,FragmentsMapsActivity.class);
+                startActivity(inten);
+            }
+        });
+
+        //google y firevase
 
         photoPerfil =   findViewById(R.id.photoPerfil);
         nameUser =   findViewById(R.id.nameUser);

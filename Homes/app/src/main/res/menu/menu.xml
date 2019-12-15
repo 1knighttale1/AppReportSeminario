@@ -10,7 +10,7 @@
     </item>
     <item
     android:id="@+id/main_menu"
-    android:title="Main Menu"
+    android:title="Menu"
     app:showAsAction="always"
     >
 </item>

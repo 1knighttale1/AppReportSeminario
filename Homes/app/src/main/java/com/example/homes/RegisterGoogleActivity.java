@@ -39,10 +39,10 @@ public class RegisterGoogleActivity extends AppCompatActivity implements GoogleA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_google);
 
-        photoPerfil =  (ImageView) findViewById(R.id.photoPerfil);
-        nameUser =  (TextView) findViewById(R.id.nameUser);
-        emailUser = (TextView) findViewById(R.id.emailUser);
-        ide =  (TextView) findViewById(R.id.ide);
+        photoPerfil =   findViewById(R.id.photoPerfil);
+        nameUser =   findViewById(R.id.nameUser);
+        emailUser =  findViewById(R.id.emailUser);
+        ide =   findViewById(R.id.ide);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()

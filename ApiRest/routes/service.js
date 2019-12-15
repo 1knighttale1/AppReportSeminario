@@ -22,7 +22,7 @@ router.post('/home', async(req, res)=>{
 })
 
 /*Show Homes*/
-router.get('/home', (req, res) => {
+router.get('/home/all', (req, res) => {
     var params = req.query;
     var limit = 100;
     if (params.limit != null) {
@@ -67,7 +67,7 @@ router.get('/home/search', (req, res) => {
 
 /**Show previus details Homes */
 router.get('/home/', (req, res) => {
-    var cad = "contacto lat long precio imagen"; //detalles previos
+    var cad = "imagen descripcion contacto"; //detalles previos
     var skip = 0;
     var limit = 20;
     var filter = {};
@@ -79,14 +79,60 @@ router.get('/home/', (req, res) => {
     if(params.limit != null){
         limit = Number(params.limit);
     }
-    //busqueda por direccion
+    //busqueda por descripcion
     if(params.search != null){
-        filter["directions"] = new RegExp(params.search, "g");
+        filter["descripcion"] = new RegExp(params.search, "g");
+    }
+    //busqueda por zona
+    if(params.zona != null){
+        filter["zona"] = params.zona;
+    }
+    //por numero de baños
+    if(params.baños != null){
+        filter["baños"] = Numer(params.baños);
+        cad += " baños";
+    }
+    //por tipo de casa
+    if(params.tipo != null){
+        filter["tipo"] = params.tipo;
+        cad += " tipo";
+    }
+    //busqueda por colegio cercano
+    if(params.colegio != null){
+        filter["colegio"] = params.colegio;
+        cad += " colegio"; 
+    }
+    //busqueda por estado
+    if(params.estado != null){
+        filter["estado"] = params.estado;
+        cad += " estado";
+    }
+    //por numero de habitaciones
+    if(params.habitaciones != null){
+        filter["habitaciones"] = Numer(params.habitaciones);
+        cad += " habitaciones";
+    }
+    //busqueda por superficie
+    if(params.superficie != null){
+        filter["superficie"] = Number(params.superficie);
+        cad += " superficie";
+    }
+ /*   if(params.Smin != null || params.Smax != null){
+        filter["superficie"] = {"$gt": Number(params.Smin), "$lt": Number(params.Smax)};
+        cad += " superficie";
+    }*/
+    //busqueda por año de construccion
+    if(params.fecha_construccion != null){
+        filter["fecha_construccion"] = params.fecha_construccion;
+        cad += " fecha_construccion";
     }
     //busqueda por precio
-    if(params.min != null && params.max){
+    if(params.min != null || params.max != null){
         filter["precio"] = {"$gt": Number(params.min), "$lt": Number(params.max)};
+        cad += " precio";
     }
+    
+
     
     HOME.find(filter).skip(skip).limit(limit).select(cad).exec((err, docs) => {
         if (err){
@@ -140,8 +186,11 @@ router.get('/zone', (req, res) => {
     if (params.skip != null) {
         skip = parseInt(params.skip);
     }
-    if(params.search != null){
-        filter["directions"] = new RegExp(params.search, "g");
+    if(params.nombre != null){
+        filter["nombre"] = params.nombre;
+    }
+    if(params.ciudad != null){
+        filter["ciudad"] = params.ciudad;
     }
     ZONE.find(filter).limit(limit).skip(skip).exec((err, docs) => {
         res.status(200).json(docs);

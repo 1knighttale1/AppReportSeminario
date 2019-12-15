@@ -5,10 +5,12 @@ const ZONESCHEMA = {
     zoom: Number,
     lat: Number,
     lng: Number,
-    coordenadas:[{
+    coordlat: Array,
+    coordlng: Array,
+   /* coordenadas:[{
         lat:[],
         lng:[]
-    }],
+    }],  no por ahora :'v*/
 }
 
 const ZONES = mongoose.model("zones", ZONESCHEMA);

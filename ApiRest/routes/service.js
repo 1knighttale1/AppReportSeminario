@@ -9,18 +9,20 @@ var jwt = require("jsonwebtoken");
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
+    console.log('main page')
   });
+
 /*Creation Homes*/
-router.post('/homes', async(req, res)=>{
-    console.log(req.body);
+router.post('/home', async(req, res)=>{
     var params = req.body;
     var homes = new HOME(params);
     var result = await homes.save();
     res.status(200).json(result);
+    console.log('home saved');
 })
 
 /*Show Homes*/
-router.get('/homes', (req, res) => {
+router.get('/home', (req, res) => {
     var params = req.query;
     var limit = 100;
     if (params.limit != null) {
@@ -32,12 +34,13 @@ router.get('/homes', (req, res) => {
     }
     HOME.find({}).limit(limit).skip(skip).exec((err, docs) => {
         res.status(200).json(docs);
+    console.log('showing homes');
     });
 });
 
 
 /*Looking a specific home*/
-router.get('/homes/search', (req, res) => {
+router.get('/home/search', (req, res) => {
     
     var params = req.query;
     var filter = {};
@@ -52,7 +55,7 @@ router.get('/homes/search', (req, res) => {
                 return;
             }
             res.status(200).json(docs);
-            console.log("Looking a specific home");
+            console.log("Showing a specific home");
             return;
         });
     }else{
@@ -63,7 +66,7 @@ router.get('/homes/search', (req, res) => {
 });
 
 /**Show previus details Homes */
-router.get('/homes/', (req, res) => {
+router.get('/home/', (req, res) => {
     var cad = "contacto lat long precio imagen"; //detalles previos
     var skip = 0;
     var limit = 20;
@@ -92,21 +95,37 @@ router.get('/homes/', (req, res) => {
             });
             return;
         }
-        res.status(200).json(docs);
-        console.log("Looking homes");
-        return;
+    res.status(200).json(docs);
+    console.log("showing homes");
+    return;
     });
 });
+
+/**Delete Home */
+router.delete("/home", async(req,res) => {
+    var id = req.query.id;
+    //console.log(req.query.id);
+    if (id == null) {
+      res.status(300).json({
+        msn: "introducir id"    
+      });
+      return;
+    }
+    var result = await HOME.remove({_id: id});
+    res.status(200).json(result);
+    console.log('home deleted');
+  });
 
 /** --------------------------------------------------------------------------- */
 
 /**Creation Zones */
 router.post('/zone', async(req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
     var params = req.body;
-    var zone = new ZONE(params);
-    var result = await zone.save();
+    var zones = new ZONE(params);
+    var result = await zones.save();
     res.status(200).json(result);
+    console.log('zone saved');
 });
 
 /**Show Neighborhood */
@@ -126,8 +145,23 @@ router.get('/zone', (req, res) => {
     }
     ZONE.find(filter).limit(limit).skip(skip).exec((err, docs) => {
         res.status(200).json(docs);
+    console.log('showing zones');
     });
 });
+
+/**Delete Zone */
+router.delete("/zone", async(req,res) => {
+    var id = req.query.id;
+    if (id == null) {
+      res.status(300).json({
+        msn: "introducir id"    
+      });
+      return;
+    }
+    var result = await ZONE.remove({_id: id});
+    res.status(200).json(result);
+    console.log('zone deleted');
+  });
 
 /** ------------------------------------------------------------------------------ */
 /*Register Users*/
@@ -144,6 +178,7 @@ router.post('/user', async(req, res) => {
     var users = new USER(params);
     var result = await users.save();
     res.status(200).json(result);
+    console.log('user saved');
 });
 
 
@@ -160,6 +195,7 @@ router.get('/user', (req, res) => {
     }
     USER.find({}).limit(limit).skip(skip).exec((err, docs) => {
         res.status(200).json(docs);
+    console.log('showing users');
     });
 });
 
@@ -175,6 +211,7 @@ router.delete("/user", async(req,res) => {
     }
     var result = await USER.remove({_id: id});
     res.status(200).json(result);
+    console.log('user deleted');
   });
 
 /** ----------------------------------------------------------------------------------- */

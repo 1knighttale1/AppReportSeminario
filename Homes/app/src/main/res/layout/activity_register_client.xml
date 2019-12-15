@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="12dp"
-                    android:text="USUARIO" />
+                    android:text="NOMBRE" />
 
                 <TextView
                     android:id="@+id/dato2"

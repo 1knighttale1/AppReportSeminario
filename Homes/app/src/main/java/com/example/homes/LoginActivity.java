@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.homes.Host.utilidades;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -25,8 +28,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
+
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private GoogleApiClient googleApiClient;
     private SignInButton signInButton;
     public static final int SIGN_IN_CODE = 0;
@@ -35,6 +46,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
     private ProgressBar progressBar;
+
+    /**LOGIN API*/
+    EditText email,pass;
+    Button reg,log;
+    Context con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +98,52 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        //LOGIN
+        email=findViewById(R.id.Etemail);
+        pass=findViewById(R.id.Etpassword);
+        reg=findViewById(R.id.btnregistrar);
+        log=findViewById(R.id.btnconectar);
+        reg.setOnClickListener(this);
+        log.setOnClickListener(this);
+        con=this;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.btnregistrar){
+            Intent intent=new Intent(con,RegisterClientActivity.class);
+            startActivity(intent);
+        }else if(v.getId()==R.id.btnconectar){
+            conectar();
+        }
+    }
+
+    private void conectar() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams req = new RequestParams();
+        req.put("email", email.getText().toString());
+        req.put("password", pass.getText().toString());
+
+        client.post(utilidades.ip+"/api/v1.0/login", req, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    String res=response.getString("message");
+                    if(res.equals("autenticacion exitosa")){
+                        utilidades.token=response.getString("token");
+                        Toast.makeText(con,""+res,Toast.LENGTH_SHORT).show();
+                        Intent in = new Intent(con,FragmentsMapsActivity.class);
+                        startActivity(in);
+                    }else{
+                        Toast.makeText(con,""+res,Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override

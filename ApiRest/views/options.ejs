@@ -5,11 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Opciones admin</title>
-</head>
+    <%- include ('partials/head.ejs') %>
+    </head>
 <body>
+    
+    <%- include ('partials/navigation.ejs') %>
     <h2>Opciones Admin</h2>
-    <center>
-        
-    </center>
+
+    
+    <table align="center" width="80%" border=1>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Tipo</th>
+            <th>Opciones</th>
+        </tr>
+        <% users.forEach( obj => { %>
+        <tr>
+            <td><%= obj.name %></td>
+            <td><%= obj.email %></td>
+            <td><%= obj.phone %></td>
+            <td><%= obj.address %></td>
+            <td><%= obj.tipo %></td>
+            <td><a href="#">Eliminar</a></td>
+        </tr>
+        <% }) %>
+    </table>
 </body>
 </html>

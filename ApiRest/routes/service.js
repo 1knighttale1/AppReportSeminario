@@ -33,8 +33,14 @@ router.get('/home/all', (req, res) => {
         skip = parseInt(params.skip);
     }
     HOME.find({}).limit(limit).skip(skip).exec((err, docs) => {
+        if (err){
+            res.status(300).json({
+                msn:"Error en la base de datos"
+            });
+            return;
+        }
         res.status(200).json(docs);
-    console.log('showing homes');
+        console.log('showing homes');
     });
 });
 

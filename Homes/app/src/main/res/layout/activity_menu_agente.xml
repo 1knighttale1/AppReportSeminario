@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/fondo">
+
+
+    <TextView
+        android:id="@+id/txtmenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Menu Agente" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="282dp"
+        android:layout_height="204dp"
+        android:layout_marginLeft="70dp"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/btnRegCasa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrar Inmueble" />
+
+    <Button
+        android:id="@+id/btnSalir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="SAlIR" />
+</LinearLayout>

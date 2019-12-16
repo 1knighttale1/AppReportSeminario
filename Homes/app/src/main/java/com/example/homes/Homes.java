@@ -1,5 +1,7 @@
 package com.example.homes;
 
+import java.io.Serializable;
+
 public class Homes {
 
     private int imgHome;

@@ -3,23 +3,19 @@ package com.example.homes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-<<<<<<< HEAD
-import com.example.homes.Fragments.MainFragment;
-import com.example.homes.Fragments.MapFragment;
-=======
 import com.example.homes.Host.utilidades;
->>>>>>> bb41278fa15ce8d6c1da952a64bc5d49a67e8e14
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -52,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
     private ProgressBar progressBar;
+    private final int CODE_PERMISSION = 1000;
 
     /**LOGIN API*/
     EditText email,pass;
@@ -113,6 +110,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         reg.setOnClickListener(this);
         log.setOnClickListener(this);
         con=this;
+
+        //Permisos
+        requestPermission();
+
     }
 
     @Override
@@ -218,4 +219,47 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
     }
+
+    //Permisos
+
+    public Boolean checkPermission(String permission) {
+        int result = this.checkCallingOrSelfPermission(permission);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+    private void requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.CALL_PHONE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.INTERNET}, CODE_PERMISSION);
+        } else {
+            if (checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) &&
+                    checkPermission(Manifest.permission.CALL_PHONE)) {
+                Toast.makeText(this, "Los permisos fuerón otorgados", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == CODE_PERMISSION) {
+            if (grantResults.length > 0){
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permiso de almacenamiento otorgado",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                }
+                if (grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permiso de almacenamiento de llamadas atorgado",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                }
+                if (grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permiso de Localizacion atorgado",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                }
+            }
+        }
+    }
+
 }

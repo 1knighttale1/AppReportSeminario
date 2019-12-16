@@ -280,7 +280,7 @@ router.delete("/user", async(req,res) => {
       return;
     }
     var result = await USER.remove({_id: id});
-    res.status(200).json(result);
+    //res.status(200).json(result);
     console.log('user deleted');
   });
 

@@ -10,10 +10,9 @@
 <body>
     
     <%- include ('partials/navigation.ejs') %>
-    <h2>Opciones Admin</h2>
-
+    <h2>Lista de usuarios</h2>
     
-    <table align="center" width="80%" border=1>
+    <table align="center" width="80%" border=2 >
         <tr>
             <th>Nombre</th>
             <th>Email</th>
@@ -29,7 +28,7 @@
             <td><%= obj.phone %></td>
             <td><%= obj.address %></td>
             <td><%= obj.tipo %></td>
-            <td><a href="#">Eliminar</a></td>
+            <td><a href='/admin/user/delete?id=<%= obj._id %>'>Eliminar</a></td>
         </tr>
         <% }) %>
     </table>

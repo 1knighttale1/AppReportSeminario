@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio admin</title>
+    <%- include ('partials/head.ejs') %>
+    </head>
+<body>
+    
+    <%- include ('partials/navigation.ejs') %>
+    
+    <h2>Registro de usuarios</h2>
+
+    <center>
+        <br><br>
+        <table width="30%">
+            <tr>
+                <th colspan="2"><h3>Ingresar Usuario</h3></th>
+            </tr>
+            <form action="/admin/user/new" method="POST">
+            <tr>
+                <td><label>Nombre:</label></td>
+                <td><input name="name" type="text"></td>
+            </tr>
+            <tr>
+                <td><label>Email : </label></td>
+                <td><input name="email" type="text"></td>
+            </tr>
+            <tr>
+                <td><label>Contraseña: </label></td>
+                <td><input name="password" type="password"></td>
+            </tr>
+            <tr>
+                <td><label>Telefono : </label></td>
+                <td><input name="phone" type="number"></td>
+            </tr>
+            <tr>
+                <td><label>Sexo : </label></td>
+                <td><input name="sex" type="text"></td>
+            </tr>
+            <tr>
+                <td><label>Direccion : </label></td>
+                <td><input name="address" type="text"></td>
+            </tr>
+            <tr>
+                <td><label>Tipo : </label></td>
+                <td><input name="tipo" type="text"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Submit"> <input type="reset" value="Reset"></td>
+            </tr>
+            </form>
+    
+        </table>
+    </center>
+</body>
+</html>

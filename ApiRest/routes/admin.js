@@ -23,17 +23,56 @@ router.get('/main', function(req, res){
 
 //ingresar a opciones
 router.get('/options', function(req, res){
-  var users = {};
   USER.find({}).select("_id name email phone address tipo").exec((err, docs) =>{
     if(err){
       res.status(300).json({
         msn: "Error en la base de datos"
       });
     }
-    //users = docs;
-    res.render('options', {users: docs})
+    res.render('options', {users: docs});
   });
   //res.render('options', {users: "hola mundo"});
+});
+
+//formulario para resgistrar usuarios
+router.get('/register', function(req, res){
+  console.log('ingresando a register');
+  res.render('register');
+});
+
+//delete users
+router.get("/user/delete", async(req,res) => {
+  var id = req.query.id;
+  console.log(id);
+  if (id == null) {
+    res.status(300).json({
+      msn: "introducir id"    
+    });
+    return;
+  }
+  var result = await USER.remove({_id: id});
+
+  //res.status(200).json(result);
+  console.log('user deleted');
+  res.render('main');
+});
+
+//new user
+router.post('/user/new', async(req, res) => {
+  //console.log(req.body);
+  var params = req.body;
+  if(params.tipo == "agente"){
+    console.log("se registro agente");
+    params["tipo"] = "agente";
+} else{
+    params["tipo"] = "cliente";
+    console.log("se registro cliente");
+}
+  params["registerdate"] = new Date();
+  var users = new USER(params);
+  var result = await users.save();
+  console.log('user saved');
+  res.render('main');
 });
 
 module.exports = router;

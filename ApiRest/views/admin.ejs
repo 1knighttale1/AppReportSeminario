@@ -8,26 +8,26 @@
     <%- include('partials/head.ejs') %>
 </head>
 <body>
-    
     <h1>Bienvenido</h1>
+    <center>
     <br><br>
-    <table align="center" width="30%">
+    <table width="30%">
         <tr>
             <th>Ingresar Admin</th>
         </tr>
         <form action="/admin/main" method="GET">
         <tr>
-            <td align="center"><label>Username: <input name="user" type="text"></label></td>
+            <td><label>Username: <input name="user" type="text"></label></td>
         </tr>
         <tr>
-            <td align="center"><label>Password: <input name="password" type="password"></label></td>
+            <td><label>Password : <input name="password" type="password"></label></td>
         </tr>
         <tr>
-            <td align="center"><input type="submit" value="Submit"> <input type="reset" value="Reset"></td>
+            <td><input type="submit" value="Submit"> <input type="reset" value="Reset"></td>
         </tr>
         </form>
 
     </table>
-    
+    </center>    
 </body>
 </html>

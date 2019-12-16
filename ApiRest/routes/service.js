@@ -67,7 +67,7 @@ router.get('/home/search', (req, res) => {
 
 /**Show previus details Homes */
 router.get('/home/', (req, res) => {
-    var cad = "imagen descripcion contacto"; //detalles previos
+    var cad = "imagen descripcion contacto"; //detalles previos home
     var skip = 0;
     var limit = 20;
     var filter = {};
@@ -83,13 +83,9 @@ router.get('/home/', (req, res) => {
     if(params.search != null){
         filter["descripcion"] = new RegExp(params.search, "g");
     }
-    //busqueda por zona
-    if(params.zona != null){
-        filter["zona"] = params.zona;
-    }
     //por numero de baños
     if(params.baños != null){
-        filter["baños"] = Numer(params.baños);
+        filter["baños"] = Number(params.baños);
         cad += " baños";
     }
     //por tipo de casa
@@ -109,7 +105,7 @@ router.get('/home/', (req, res) => {
     }
     //por numero de habitaciones
     if(params.habitaciones != null){
-        filter["habitaciones"] = Numer(params.habitaciones);
+        filter["habitaciones"] = Number(params.habitaciones);
         cad += " habitaciones";
     }
     //busqueda por superficie
@@ -131,7 +127,11 @@ router.get('/home/', (req, res) => {
         filter["precio"] = {"$gt": Number(params.min), "$lt": Number(params.max)};
         cad += " precio";
     }
-    
+    //busqueda por zona
+    if(params.zona != null){
+        filter["zona"] = params.zona;
+        cad = "imagen descripcion";
+    }
 
     
     HOME.find(filter).skip(skip).limit(limit).select(cad).exec((err, docs) => {
@@ -178,21 +178,35 @@ router.post('/zone', async(req, res) => {
 router.get('/zone', (req, res) => {
     var params = req.query;
     var limit = 100;
+    var view = "nombre ciudad";
     var filter = {};
     if (params.limit != null) {
         limit = parseInt(params.limit);
-    } 
+    }
     var skip = 0;
     if (params.skip != null) {
         skip = parseInt(params.skip);
     }
+    /* probando en home
     if(params.nombre != null){
-        filter["nombre"] = params.nombre;
+        var cad = "imagen descripcion"; //detalles previos home
+        filter["zona"] = params.nombre;
+        HOME.find(filter).skip(skip).limit(limit).select(cad).exec((err, docs) => {
+            if (err){
+                res.status(300).json({
+                    msn:"Error en la base de datos"
+                });
+                return;
+            }
+        console.log("showing zone's homes ");
+        return;
+        });
+    }*/
+    //mostrar toda la informacion de zonas
+    if(params.view != null){
+            view = "";
     }
-    if(params.ciudad != null){
-        filter["ciudad"] = params.ciudad;
-    }
-    ZONE.find(filter).limit(limit).skip(skip).exec((err, docs) => {
+    ZONE.find(filter).limit(limit).skip(skip).select(view).exec((err, docs) => {
         res.status(200).json(docs);
     console.log('showing zones');
     });
@@ -217,10 +231,11 @@ router.delete("/zone", async(req,res) => {
 router.post('/user', async(req, res) => {
     //console.log(req.body);
     var params = req.body;
-    if(params.tipo == null){
+    if(params.tipo != null){
         console.log("se registro agente");
-        params["tipo"] = params.tipo;
+        params["tipo"] = "agente";
     }else{
+        params["tipo"] = "cliente";
         console.log("se registro cliente");
     }
     params["registerdate"] = new Date();

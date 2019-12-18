@@ -28,7 +28,8 @@ public class MenuAgente extends AppCompatActivity {
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(MenuAgente.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

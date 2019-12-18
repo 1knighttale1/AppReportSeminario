@@ -69,7 +69,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         params.put("estado", tipo.get(spntipo.getSelectedItemPosition()));
         params.put("precio", min.getText().toString());
         params.put("precio", max.getText().toString());
-        Toast.makeText(SearchActivity.this,""+params,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SearchActivity.this,""+params,Toast.LENGTH_SHORT).show();
         /**final ListView list = (ListView)this.findViewById(R.id.list_main);
          final ArrayList<Item> list_data = new ArrayList<Item>();*/
         client.get(Rhome+"", params, new JsonHttpResponseHandler(){

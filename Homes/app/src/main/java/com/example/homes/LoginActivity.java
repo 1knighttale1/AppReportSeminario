@@ -144,11 +144,24 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 super.onSuccess(statusCode, headers, response);
                 try {
                     String res=response.getString("message");
+                    String resa=response.getString("tipo");
                     if(res.equals("autenticacion exitosa")){
+<<<<<<< HEAD
                         utilidades.token=response.getString("token");
                         Toast.makeText(con,""+res,Toast.LENGTH_SHORT).show();
                         Intent in = new Intent(con,FragmentsMapsActivity.class);
                         startActivity(in);
+=======
+                        if(resa.equals("agente")){
+                            Intent in = new Intent(con,MenuAgente.class);
+                            utilidades.token=response.getString("token");
+                            startActivity(in);
+                        }else{
+                            Intent in = new Intent(con,FragmentsMapsActivity.class);
+                            utilidades.token=response.getString("token");
+                            startActivity(in);
+                        }
+>>>>>>> 4df48ee56f9c8c25fce40d08881ccc811c807502
 
                     }else{
                         Toast.makeText(con,""+res,Toast.LENGTH_SHORT).show();

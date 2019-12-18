@@ -51,8 +51,14 @@ router.get('/home/search', (req, res) => {
     var params = req.query;
     var filter = {};
 
+    if(params.lat != null && params.lng != null){
+        filter["lat"] = Number(params.lat);
+        filter["lng"] = Number(params.lng);
+    }
     if(params.id != null){
-        filter["id"] = Number(params.id);
+        filter["_id"] = params.id;
+    }
+    if(filter != null){
         HOME.find(filter).exec((err, docs) => {
             if (err){
                 res.status(300).json({
@@ -311,6 +317,7 @@ router.post('/login', async(req, res, next)=>{
                     return;
                 }
                 res.status(200).json({
+                    tipo:docs.tipo,
                     "token": token
                 });
                 return;

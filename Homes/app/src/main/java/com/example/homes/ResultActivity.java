@@ -37,7 +37,7 @@ public class ResultActivity extends AppCompatActivity {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         //params.put("estado", titletxt.getText().toString());
-        Toast.makeText(ResultActivity.this, " "+params, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ResultActivity.this, " "+params, Toast.LENGTH_SHORT).show();
         final ListView list = (ListView)this.findViewById(R.id.list_main);
         final ArrayList<Item> list_data = new ArrayList<Item>();
         client.get(HOMES+"", params, new JsonHttpResponseHandler(){

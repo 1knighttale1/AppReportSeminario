@@ -24,11 +24,6 @@
         <activity android:name=".ResultActivity"></activity>
         <activity android:name=".RegisterHome" />
         <activity android:name=".MenuAgente">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".DetailHome" />
         <activity android:name=".SearchActivity" />

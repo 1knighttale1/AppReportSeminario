@@ -13,8 +13,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.homes.Data.Item;
 import com.example.homes.Host.utilidades;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -34,8 +37,11 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -127,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void conectar() {
-        AsyncHttpClient client = new AsyncHttpClient();
+        final AsyncHttpClient client = new AsyncHttpClient();
         RequestParams req = new RequestParams();
         req.put("email", email.getText().toString());
         req.put("password", pass.getText().toString());
@@ -143,6 +149,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         Toast.makeText(con,""+res,Toast.LENGTH_SHORT).show();
                         Intent in = new Intent(con,FragmentsMapsActivity.class);
                         startActivity(in);
+
                     }else{
                         Toast.makeText(con,""+res,Toast.LENGTH_SHORT).show();
                     }
@@ -250,11 +257,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 }
                 if (grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Permiso de almacenamiento de llamadas atorgado",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                }
-                if (grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Permiso de Localizacion atorgado",
                             Toast.LENGTH_SHORT).show();
                 } else {
                 }

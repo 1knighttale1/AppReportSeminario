@@ -78,16 +78,26 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         //-19.5678143,-65.7655377Michoza
         // Add a marker in Sydney and move the camera
-        LatLng potosi = new LatLng(-19.5678143, -65.7655377);
+        LatLng casa1 = new LatLng(-19.5678143, -65.7655377);
         //-19.560591,-65.7643413UATF
-        LatLng uatf = new LatLng(-19.560591,-65.7643413);
-        mMap.addMarker(new MarkerOptions().position(potosi).title("mi choza :v"));
-        mMap.addMarker(new MarkerOptions().position(uatf).title("U.A.T.F."));
+        LatLng casa2 = new LatLng(-19.56658,-65.76833);
+        LatLng casa3 = new LatLng(-19.014136,-65.288828);
+        LatLng casa4 = new LatLng(-19.017121,-65.292668);
+        LatLng casa5 = new LatLng(-19.566085,-65.768759);
+
+        mMap.addMarker(new MarkerOptions().position(casa1).title(""));
+        mMap.addMarker(new MarkerOptions().position(casa2).title(""));
+        mMap.addMarker(new MarkerOptions().position(casa3).title(""));
+        mMap.addMarker(new MarkerOptions().position(casa4).title(""));
+        mMap.addMarker(new MarkerOptions().position(casa5).title(""));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(potosi));
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(potosi)
+                .target(casa1)
                 .zoom(15)
                 .bearing(0)
                 .tilt(45)
@@ -95,7 +105,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         Geocoder geocoder = new Geocoder(rootView.getContext(), Locale.US);
         try {
-           List<Address> direcciones = geocoder.getFromLocation(potosi.latitude, potosi.longitude, 1);
+           List<Address> direcciones = geocoder.getFromLocation(casa1.latitude, casa2.longitude, 1);
            if(direcciones.size()> 0){
                Toast.makeText(rootView.getContext(),""+ direcciones.get(0).getAddressLine(0),Toast.LENGTH_SHORT).show();
 
@@ -109,7 +119,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                //Intent intent = Intent();
+
                 return false;
             }
         });

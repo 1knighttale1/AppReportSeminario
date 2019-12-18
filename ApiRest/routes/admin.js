@@ -64,10 +64,10 @@ router.post('/user/new', async(req, res) => {
   if(params.tipo == "agente"){
     console.log("se registro agente");
     params["tipo"] = "agente";
-} else{
+  }else{
     params["tipo"] = "cliente";
     console.log("se registro cliente");
-}
+  }
   params["registerdate"] = new Date();
   var users = new USER(params);
   var result = await users.save();

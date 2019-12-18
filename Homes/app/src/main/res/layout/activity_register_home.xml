@@ -173,13 +173,6 @@
                     android:layout_weight="1"
                     android:text="Superficie" />
 
-                <EditText
-                    android:id="@+id/Rsuperficie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="number" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -337,6 +330,15 @@
                     android:ems="10"
                     android:inputType="textPersonName" />
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/Rsuperficie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

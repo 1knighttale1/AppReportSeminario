@@ -240,9 +240,10 @@ router.delete("/zone", async(req,res) => {
 
 /** ------------------------------------------------------------------------------ */
 /*Register Users*/
-router.post('/user', async(req, res) => {
+router.post('/user', (req, res) => {
     //console.log(req.body);
     var params = req.body;
+    var email = params.email;
     if(params.tipo != null){
         console.log("se registro agente");
         params["tipo"] = "agente";
@@ -250,11 +251,21 @@ router.post('/user', async(req, res) => {
         params["tipo"] = "cliente";
         console.log("se registro cliente");
     }
-    params["registerdate"] = new Date();
-    var users = new USER(params);
-    var result = await users.save();
-    res.status(200).json(result);
-    console.log('user saved');
+    
+    USER.find({email: email}).exec( async(err, docs) => {
+        if(docs != null){
+            console.log("el email ya existe");
+            res.status(200).json({
+                msn: "el usuario ya existe"
+            });
+        }else{
+            params["registerdate"] = new Date();
+            var users = new USER(params);
+            var result = await users.save();
+            res.status(200).json(result);
+            console.log('user saved');
+        }
+    });   
 });
 
 
@@ -286,7 +297,7 @@ router.delete("/user", async(req,res) => {
       return;
     }
     var result = await USER.remove({_id: id});
-    //res.status(200).json(result);
+    res.status(200).json(result);
     console.log('user deleted');
   });
 

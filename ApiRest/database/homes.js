@@ -2,7 +2,6 @@ const mongoose = require("./connect");
 const HOMESCHEMA = {
     ciudad: String,
     tipo: String,
-    condominio:Boolean,
     departamentos: Number,
     estado: String,
     habitaciones: Number,

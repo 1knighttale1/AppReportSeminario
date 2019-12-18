@@ -21,8 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegisterHome"></activity>
-        <activity android:name=".MenuAgente" >
+        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".RegisterHome" />
+        <activity android:name=".MenuAgente">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
